@@ -13,4 +13,5 @@
 
 - https://www.youtube.com/watch?v=UrwtQfSbrOs&t=1111s
 - https://www.zeromq.ord/socket-api/
+- http://zguide.zeromq.org/page:chapter2
 
