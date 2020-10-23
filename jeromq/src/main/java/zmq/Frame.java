@@ -14,7 +14,7 @@ public class Frame extends JFrame {
 
         public Frame() {
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setBounds(0, 0, 1920, 1080);
+                setBounds(0, 0, 2560, 1440);
                 contentPane = new JPanel();
                 contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
                 setContentPane(contentPane);
