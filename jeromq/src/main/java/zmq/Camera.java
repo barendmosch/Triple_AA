@@ -12,7 +12,7 @@ public class Camera {
 
         Camera(){
                 video = new VideoCapture();
-                video.open(0);
+                video.open(6);
         }
 
         BufferedImage getOneFrame() {
