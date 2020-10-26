@@ -2,6 +2,7 @@ package zmq;
 
 import org.opencv.videoio.VideoCapture;
 import java.awt.image.BufferedImage;
+import org.opencv.core.Mat;
 
 public class Camera {
 
@@ -12,18 +13,17 @@ public class Camera {
 
         Camera(){
                 video = new VideoCapture();
-                video.open(6);
+                video.open(0);
         }
 
         BufferedImage getOneFrame() {
                 /* Grabs, decodes and returns the next video frame */
                 video.read(mat2Img.mat);
-
-                saveFrame(mat2Img.getImage(mat2Img.mat));
-
-                /* I think somewhere here I might need to perform face detection and recognition algorithms */
-
                 return mat2Img.getImage(mat2Img.mat);
+        }
+
+        public BufferedImage returnImageFromMat(Mat frame){
+                return mat2Img.getImage(frame);
         }
 
         public void saveFrame(BufferedImage image){

@@ -8,6 +8,8 @@ import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ.Socket;
 
+
+import org.opencv.objdetect.CascadeClassifier;
 import java.awt.EventQueue;
 
 /* The main class will open the camera, keep the camera running indefinetily and sends the data to the client */
@@ -30,6 +32,9 @@ public class Main extends JFrame {
 
     public static void main(String[] args) throws Exception {
         OpenCV.loadLocally(); // initialize the library locally
+
+        // FaceFinder faceFinder = new FaceFinder();
+        // faceFinder.detectFaceFromImage();
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
