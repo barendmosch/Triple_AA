@@ -45,8 +45,8 @@ public class FrameController {
     }
 
     public void saveImage(int i) {
-        File f = new File("resources/wholeImg" + i + ".jpg");
         try {
+                File f = new File("resources/wholeImg" + i + ".jpg");
                 ImageIO.write(getImage(), "JPG", f);
         } catch (IOException e) {
                 e.printStackTrace();
