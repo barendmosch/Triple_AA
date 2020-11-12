@@ -1,8 +1,6 @@
 /Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/ImageController.java
 /Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/LBPHAlgorithm.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/entity/PixelMatrix.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/entity/ListOfMatrices.java
+/Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/maths/LBP.java
 /Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/maths/BasicMath.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/vision/maths/MatrixMath.java
 /Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/converters/Converter.java
 /Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/src/main/java/Main.java

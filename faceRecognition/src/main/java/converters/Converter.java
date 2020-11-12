@@ -79,17 +79,6 @@ public class Converter {
                 }
         }
     
-        /* Read the camera input (matrix) and return the current frame as a BufferedImage */
-        public BufferedImage getImageFromMat(Mat mat){
-                getSpace(mat);
-                /* Raster is a rectangular array of pixels */
-                WritableRaster raster = img.getRaster();
-                DataBufferByte dataBuffer = (DataBufferByte) raster.getDataBuffer();
-                byte[] data = dataBuffer.getData();
-                mat.get(0, 0, data);
-                return img;
-        }
-
         public BufferedImage Mat2BufferedImage(Mat mat) throws IOException{
                 //Encoding the image
                 MatOfByte matOfByte = new MatOfByte();
@@ -100,7 +89,7 @@ public class Converter {
                 InputStream in = new ByteArrayInputStream(byteArray);
                 BufferedImage bufImage = ImageIO.read(in);
                 return bufImage;
-             }
+        }
 
         /* This is for splitting a string to an int[] */
         public int[] stringToIntArray(String arr){

@@ -12,7 +12,7 @@ public class Main {
         OpenCV.loadLocally(); // initialize the library locally
         
         try (ZContext context = new ZContext()) {
-            int y = 0;
+            int i = 0;
             Socket socket = context.createSocket(SocketType.PULL);
             socket.connect("tcp://*:5555");
 
@@ -24,13 +24,13 @@ public class Main {
             while(!Thread.currentThread().isInterrupted()){
                 byte[] imageData = socket.recv(0);
 
-                Thread.sleep(2000);
+                Thread.sleep(1000);
 
                 /* Start the recognition process after 2 second one time only
                     In reality this will go on forever and I will not save outgoing pictures */
-                if (y < 1){
-                    imageMaker.setImage(imageData);
-                    imageMaker.startRecognition();
+                if (i < 10){
+                    imageMaker.setImageAndMakeGrayScale(imageData);
+                    imageMaker.startRecognition(i);
                 }
                 /* USE THIS IS YOU WANT TO SAVE THE IMAGE AS A JPG IN THE RESOURCES FOLDER */
                 // imageMaker.saveImage(y);
@@ -39,7 +39,7 @@ public class Main {
 
 
 
-                y++;
+                i++;
             }
         }
     }
