@@ -24,7 +24,7 @@ public class Main {
             while(!Thread.currentThread().isInterrupted()){
                 byte[] imageData = socket.recv(0);
 
-                Thread.sleep(1000);
+                Thread.sleep(200);
 
                 /* Start the recognition process after 2 second one time only
                     In reality this will go on forever and I will not save outgoing pictures */

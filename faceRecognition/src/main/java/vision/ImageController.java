@@ -12,6 +12,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import converters.Converter;
+import people.TrainingSet;
 
 public class ImageController {
 
@@ -19,11 +20,13 @@ public class ImageController {
         private BufferedImage buf_image;
         private byte[] data_image;
         private Mat gray_image;
+        public TrainingSet barend;
 
         private static String IMAGE_PATH = "/Users/barendmosch/source/repos/ZeroMQ_ws/faceRecognition/resources/trainingImages/barend/output";
 
         public ImageController(){
                 conv = new Converter();
+                barend = new TrainingSet();
         }
 
         public void setImageAndMakeGrayScale(byte[] data){
@@ -59,21 +62,22 @@ public class ImageController {
                 - If not, 
                         - Keep searching */
         public void startRecognition(int i) {
+                System.out.println(i);
                 LBPHAlgorithm lbph = new LBPHAlgorithm(gray_image);
                 
                 /* start the recognition process */
-                lbph.startLBPProcess();
-                lbph.createHistograms();
+                lbph.startLBPProcess(barend);
+                // lbph.safeHistograms();
 
                 /* Save the imcoming grayscale image and the output LBP Mat as training images in the DB */
                 // saveOneImage(lbph.getGrayScaleMat(), "grayScale", i); 
-                saveTrainingData(lbph.getLBPMat(), "lbph", i);
+                // saveTrainingData(lbph.getLBPMat(), "lbph", i);
         }
 
         public void saveTrainingData(Mat mat, String name, int i){
                 try {
                         BufferedImage img = conv.Mat2BufferedImage(mat);
-                        File f = new File("resources/trainingImages/yvonne/" + name + i + ".jpg");
+                        File f = new File("resources/trainingImages/barend/" + name + i + ".jpg");
                         ImageIO.write(img, "JPG", f);
                 } catch (IOException e) {
                         e.printStackTrace();
