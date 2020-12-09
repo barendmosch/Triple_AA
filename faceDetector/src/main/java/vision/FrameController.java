@@ -66,7 +66,7 @@ public class FrameController {
         return dtConverter.convertImageToByteArray(img);
     }
 
-    public BufferedImage getImage(){
+    public BufferedImage getImage() {
         return camera.mat2Img.getImageFromMat(frame);
     }
 

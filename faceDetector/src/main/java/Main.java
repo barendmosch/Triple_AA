@@ -40,7 +40,9 @@ public class Main {
                     Socket socket = context.createSocket(SocketType.PUSH);
                     socket.bind("tcp://*:5555");
 
-                    System.out.println("Server is ready listening on port 5555");;
+                    System.out.println("Server is ready listening on port 5555");;   
+
+                    // Process p = Runtime.getRuntime().exec("python /Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/python/move_around.py");
 
                     /* Run indefinitely untill the program stops. While running, keep calling the findFace method to read the frames from the video stream
                         and run the facedetection algorithm on it. returns true if a face is found (face array != 0)
@@ -49,6 +51,9 @@ public class Main {
                         The client can run the recognition software in the incoming frames. */
                     while(!Thread.currentThread().isInterrupted()){
                         if(controller.findFace()){
+                            // p.destroy();
+                            // Process process = Runtime.getRuntime().exec("python /Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/python/stop.py");  
+                            // System.out.print("STOP");
                             BufferedImage image = controller.getImage();
                             BufferedImage imageOfFace = controller.cropImage(image);
                             byte[] imageInBytes = controller.getImageByteArray(imageOfFace);

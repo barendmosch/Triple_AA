@@ -19,7 +19,10 @@ public class Camera {
         Camera(){
                 mat2Img = new Mat2Image();
                 video = new VideoCapture();
-                video.open(0);
+                //video.open("rtsp://192.168.1.188:554/stream/main");
+                
+                video.open(2);
+                // System.out.print(video.isOpened() + "\n\n");
         }
 
         public BufferedImage getOneFrame() {
