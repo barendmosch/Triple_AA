@@ -1,36 +1,29 @@
 package vision.maths;
 
-import java.util.LinkedList;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
-import converters.Converter;
-
 public class LBP {
-
-        private Converter conv;
-        private BasicMath basicMath;
-        private Mat main_image_mat;
-
         private static final int BORDER_VALUE = -1;
+        private static final int RADIUS = 8;
 
+        private Mat mat;
+        
         public LBP(Mat mat){
-                main_image_mat = mat;
-                conv = new Converter();
-                basicMath = new BasicMath();
+                this.mat = mat;
         }
 
         public int[][] convertMat2DIntArrayWithBorders(Mat mat){
                 /* we add 2 to the rows and cols because we want to make a border around the values
                         so that its easier to create arrays of the neighbours of every value */
-                int[][] values = new int[mat.rows() + 2][mat.cols() + 2];
+                int borders = 2;
+                int[][] values = new int[mat.rows() + borders][mat.cols() + borders];
 
                 /* Loop through the rows and cols of the matrix,
                         if row or col is the border, add -1 to indicate the border
                         if not, fill the 2D array with the corresponding value, minus -1 because of the border */
-                for (int i=0; i<mat.rows() + 2; i++){
-                        for(int y=0; y<mat.cols() + 2; y++){
+                for (int i=0; i<mat.rows() + borders; i++){
+                        for(int y=0; y<mat.cols() + borders; y++){
                                 /* Add bounderies surrounding the values so that making 3x3 matrices is easier (neighbours are always 8) */
                                 if (i == 0 || i == mat.rows() + 1 || y == 0 || y == mat.cols() + 1){
                                         values[i][y] = BORDER_VALUE;
@@ -45,8 +38,8 @@ public class LBP {
 
         public int[] getLBPValues(int[][] values){
                 /* hold every neighbour array for every value */
-                int[][] all_the_neighbours = new int[(int)main_image_mat.total()][8];
-                int[] middle_values = new int[(int)main_image_mat.total()];
+                int[][] all_the_neighbours = new int[(int)mat.total()][RADIUS];
+                int[] middle_values = new int[(int)mat.total()];
 
                 /* Loop through the 2D array with borders
                         Ignoring the border values, 
@@ -56,7 +49,7 @@ public class LBP {
                 int x = 0;
                 for(int i=0; i<values.length; i++){
                         for(int y=0; y<values[i].length; y++){
-                                int[] neighbours = new int[8];
+                                int[] neighbours = new int[RADIUS];
                                 if (values[i][y] != BORDER_VALUE){
                                         neighbours[0] = values[i-1][y-1];
                                         neighbours[1] = values[i-1][y];
@@ -77,11 +70,11 @@ public class LBP {
                         }
                 }
 
-                int[] lbp_values = new int[(int)main_image_mat.total()];
+                int[] lbp_values = new int[(int)mat.total()];
 
                 /* Loop through all the neighbours to rearrange the array so that we can determine the decimal value correctly */
                 for(int i=0; i<all_the_neighbours.length; i++){
-                        int[] new_array = basicMath.reArrangeArray(all_the_neighbours[i]);
+                        int[] new_array = BasicMath.reArrangeArray(all_the_neighbours[i]);
                         int middle_value = middle_values[i];
                         StringBuilder bit_string = new StringBuilder();
 
@@ -106,24 +99,23 @@ public class LBP {
 
         public Mat makeLBPMatrix(int[] decimals){
                 /* Convert the 1D array to 2D so it is easier to fill the matrix */
-                int[][] lbp_values = new int[main_image_mat.rows()][main_image_mat.cols()];
-                lbp_values = basicMath.arrayTo2DArray(decimals, lbp_values);
+                int[][] lbp_values = new int[mat.rows()][mat.cols()];
+                lbp_values = BasicMath.arrayTo2DArray(decimals, lbp_values);
                 
                 /* Define the LBP_OUTPUT matrix with the same dimensions as the input grayscale image */
-                Mat region_in_LBP_values = new Mat(main_image_mat.rows(), main_image_mat.cols(), CvType.CV_32F);
+                Mat lbp_mat = new Mat(mat.rows(), mat.cols(), CvType.CV_32F);
 
                 /* Loop through the dimensions and fill the matrix row by row */
-                for(int i=0; i<region_in_LBP_values.rows(); i++){
+                for(int i=0; i<lbp_mat.rows(); i++){
                         int size = lbp_values[i].length;
-
                         float[] row_data = new float[size];
                         for(int y=0; y<size; y++){
                                 row_data[y] = lbp_values[i][y];
                         }
-                        region_in_LBP_values.put(i, 0, row_data);
+                        lbp_mat.put(i, 0, row_data);
                 }
 
-                return region_in_LBP_values;
+                return lbp_mat;
         }
 
 }

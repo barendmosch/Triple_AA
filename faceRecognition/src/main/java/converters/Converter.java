@@ -6,6 +6,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -23,19 +25,19 @@ public class Converter {
 
         public Converter() {}
 
-        public BufferedImage getClientImage(int width, int height, int type, byte[] frameByte) {
+        public static BufferedImage getClientImage(int width, int height, int type, byte[] frameByte) {
                 BufferedImage image = new BufferedImage(width, height, type);
                 WritableRaster r = image.getRaster();
                 image.setData(r);
                 return image;
         }
 
-        public int bytesToInt(byte[] i) {
+        public static int bytesToInt(byte[] i) {
                 ByteBuffer wrap = ByteBuffer.wrap(i);
                 return wrap.getInt();
         }
 
-        public BufferedImage bytesToImage(byte[] data) {
+        public static BufferedImage bytesToImage(byte[] data) {
                 InputStream in = new ByteArrayInputStream(data);
                 BufferedImage bi = new BufferedImage(1, 1, 1);
                 try {
@@ -46,7 +48,7 @@ public class Converter {
                 return bi;
         }
 
-        public Mat getMatFromImage(BufferedImage in) {
+        public static Mat getMatFromImage(BufferedImage in) {
                 Mat out = new Mat(in.getHeight(), in.getWidth(), CvType.CV_8UC3);
                 byte[] data = new byte[in.getWidth() * in.getHeight() * (int) out.elemSize()];
                 int[] dataBuff = in.getRGB(0, 0, in.getWidth(), in.getHeight(), null, 0, in.getWidth());
@@ -79,7 +81,7 @@ public class Converter {
                 }
         }
     
-        public BufferedImage Mat2BufferedImage(Mat mat) throws IOException{
+        public static BufferedImage Mat2BufferedImage(Mat mat) throws IOException{
                 //Encoding the image
                 MatOfByte matOfByte = new MatOfByte();
                 Imgcodecs.imencode(".jpg", mat, matOfByte);
@@ -92,7 +94,7 @@ public class Converter {
         }
 
         /* This is for splitting a string to an int[] */
-        public int[] stringToIntArray(String arr){
+        public static int[] stringToIntArray(String arr){
                 String[] items = arr.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
                 int[] results = new int[items.length];
@@ -106,5 +108,32 @@ public class Converter {
                 }
 
                 return results;
+        }
+
+        public static String buildJSONStringFromMap(Map<Integer, Integer> h){
+                StringBuilder json_string = new StringBuilder();
+                json_string.append("{");
+                for(int i=0; i<h.size(); i++){
+                        json_string.append("\""+i+"\":"+h.get(i)+",");
+                }
+
+                json_string.setLength(json_string.length() - 1);
+                json_string.append("}");
+                
+                return json_string.toString();
+        }
+
+        public static int[] HashMapToIntArray(Map<Integer, Integer> m){
+                Iterator it_m = m.entrySet().iterator();
+                int[] v_arr = new int[m.size()];
+
+                int i = 0;
+                while(it_m.hasNext()){
+                        Map.Entry pair = (Map.Entry)it_m.next();
+                        v_arr[i] = (int)pair.getValue();
+                        i++;
+                }
+
+                return v_arr;
         }
 }

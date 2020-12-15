@@ -1,7 +1,11 @@
 import org.zeromq.ZMQ.Socket;
 
-import vision.ImageController;
+import vision.RecogniseController;
 import nu.pattern.OpenCV;
+import sql.DatabaseAction;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
@@ -18,26 +22,27 @@ public class Main {
 
             System.out.println("Connected to the server: ");
 
-            ImageController imageMaker = new ImageController();
+            RecogniseController recognition = new RecogniseController();
 
-            /* GOTTA ADD SOME FAILSAFE */
+            /* MAKE NEW PERSON */
+            // String new_person_name = "styn";
+            // DatabaseAction.addNewPerson(new_person_name);
+            
+            /* GOTTA ADD SOME FAILSAFE 
+                Also add something that triggers a new SET when the camera cant see a face after a couple of seconds during a set */
             while(!Thread.currentThread().isInterrupted()){
-                byte[] imageData = socket.recv(0);
+                byte[] image_data = socket.recv(0);
 
-                Thread.sleep(200);
-
-                /* Start the recognition process after 2 second one time only
+                /* Start the recognition process after a certain amount of time one time only
                     In reality this will go on forever and I will not save outgoing pictures */
-                if (i < 10){
-                    imageMaker.setImageAndMakeGrayScale(imageData);
-                    imageMaker.startRecognition(i);
-                }
-                /* USE THIS IS YOU WANT TO SAVE THE IMAGE AS A JPG IN THE RESOURCES FOLDER */
-                // imageMaker.saveImage(y);
+                // if (i < 50){
+                    System.out.println(i);
+                    recognition.setImageAndMakeGrayScale(image_data);
+                    recognition.recognise(i);
 
-                /* USE THIS IF YOU WANT TO TAKE A PICTURE EVERY 0.5 SECONDS */
-
-
+                /* Initialise new person data 50 times, meaning make 50 histograms of that person */
+                    // recognition.initialisePerson(new_person_name);
+                // }
 
                 i++;
             }

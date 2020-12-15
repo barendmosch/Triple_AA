@@ -6,7 +6,7 @@ public class BasicMath {
 
         public BasicMath(){}
 
-        public int[][] arrayTo2DArray(int[] input, int[][] output){
+        public static int[][] arrayTo2DArray(int[] input, int[][] output){
                 int[][] output_decimal_region = output;
 
                 /* Convert the 1D decimal array to a 2D for an easier transition to an output matrix */
@@ -22,7 +22,7 @@ public class BasicMath {
 
         /* rearrange the array to make it available to bit conversion in a clockwise way.
                 It is extremely ugly, but it works, look here https://iq.opengenus.org/lbph-algorithm-for-face-recognition/ */
-        public int[] reArrangeArray(int[] a){
+        public static int[] reArrangeArray(int[] a){
                 int[] r = new int[a.length];
                 for(int i=0; i<a.length; i++){
                         if (i < 3){
