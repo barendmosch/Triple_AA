@@ -31,8 +31,6 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try (ZContext context = new ZContext()) {
-                    int i = 0;
-                    
                     /* Make a new controller. */
                     FrameController controller = new FrameController();
 
@@ -44,32 +42,41 @@ public class Main {
 
                     // Process p = Runtime.getRuntime().exec("python /Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/python/move_around.py");
 
-                    /* Run indefinitely untill the program stops. While running, keep calling the findFace method to read the frames from the video stream
-                        and run the facedetection algorithm on it. returns true if a face is found (face array != 0)
-                        If face is found, get the current image in BufferedImage format by getting the current Mat and transforming it into an image.
-                        Transform the image in a byte array so that it can be sent to the client.
-                        The client can run the recognition software in the incoming frames. */
+                    /* Run indefinitely untill the program stops. While running, 
+                        - keep calling the findFace method to read the frames from the video stream and run the Viola and Jones algorithm. 
+                         - If face is found, transform the current Mat to BufferedImage 
+                         - crop the image so only the face is sent
+                         - transform the image into a byte array
+                         - send the byte through the socket so that the recognition software can pick it up */
                     while(!Thread.currentThread().isInterrupted()){
                         if(controller.findFace()){
+                            /* Processes are the Python scripts only */
                             // p.destroy();
                             // Process process = Runtime.getRuntime().exec("python /Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/python/stop.py");  
-                            // System.out.print("STOP");
                             BufferedImage image = controller.getImage();
                             BufferedImage imageOfFace = controller.cropImage(image);
                             byte[] imageInBytes = controller.getImageByteArray(imageOfFace);
 
-                            /* THIS IS JUST FOR MAKING FOTOS OF THE FRAME WITH THE FACE */
-                            // controller.saveImage(i);
-                            // controller.saveFace(i);
-
-                            System.out.println("From main: " + imageInBytes);
-
-                            i++;
+                            System.out.println("Data sent: " + imageInBytes);
 
                             ZMsg frameDataMsg = new ZMsg();
                             frameDataMsg.add(imageInBytes);
                             frameDataMsg.send(socket);
                         }
+
+                        /* If you want load an image to the socket */
+                        // String path = "/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/resources/images/fileName.jpg";
+                        // BufferedImage image = controller.getFakeImage(path);
+                        // if(controller.findFaceFromJPG(image)){
+                        //     BufferedImage imageOfFace = controller.cropImage(image);
+                        //     byte[] imageInBytes = controller.getImageByteArray(imageOfFace);
+
+                        //     System.out.println("Data sent: " + imageInBytes);
+
+                        //     ZMsg frameDataMsg = new ZMsg();
+                        //     frameDataMsg.add(imageInBytes);
+                        //     frameDataMsg.send(socket);
+                        // }
                     }
                 }catch(Exception e){
                     e.printStackTrace();

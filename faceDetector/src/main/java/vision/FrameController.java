@@ -34,7 +34,6 @@ public class FrameController {
 
     public boolean findFace(){
         BufferedImage currentFrame = camera.getOneFrame();
-
         frame = faceFinder.detect(currentFrame);
 
         if (!frame.empty()){
@@ -42,32 +41,6 @@ public class FrameController {
         } else{
             return false;
         }
-    }
-
-    public void saveImage(int i) {
-        try {
-                File f = new File("resources/wholeImg" + i + ".jpg");
-                ImageIO.write(getImage(), "JPG", f);
-        } catch (IOException e) {
-                e.printStackTrace();
-        }
-    }
-
-    public void saveFace(int i) {
-        File f = new File("resources/faceOutput" + i + ".jpg");
-        try {
-                ImageIO.write(cropImage(getImage()), "JPG", f);
-        } catch (IOException e) {
-                e.printStackTrace();
-        }
-    }
-
-    public byte[] getImageByteArray(BufferedImage img){
-        return dtConverter.convertImageToByteArray(img);
-    }
-
-    public BufferedImage getImage() {
-        return camera.mat2Img.getImageFromMat(frame);
     }
 
     public BufferedImage cropImage(BufferedImage img){
@@ -78,5 +51,45 @@ public class FrameController {
         int height = face.height;
         BufferedImage croppedImage = img.getSubimage(x, y, width, height);
         return croppedImage;
+    }
+
+    public byte[] getImageByteArray(BufferedImage img){
+        return dtConverter.convertImageToByteArray(img);
+    }
+
+    public BufferedImage getImage() {
+        return camera.mat2Img.getImageFromMat(frame);
+    }
+
+    public void saveImage(int i) {
+        try {
+                File f = new File("resources/images" + i + ".jpg");
+                ImageIO.write(getImage(), "JPG", f);
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+    }
+
+    public boolean findFaceFromJPG(BufferedImage currentFrame){
+        frame = faceFinder.detect(currentFrame);
+
+        if (!frame.empty()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public BufferedImage getFakeImage(String path){
+        BufferedImage buf_image = new BufferedImage(1,1,1);
+        File file = new File(path);
+
+        try {
+            buf_image = ImageIO.read(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return buf_image;
     }
 }
