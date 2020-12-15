@@ -35,7 +35,7 @@ public class Main {
 
                 /* Start the recognition process after a certain amount of time one time only
                     In reality this will go on forever and I will not save outgoing pictures */
-                // if (i < 50){
+                // if (i < 2){
                     System.out.println(i);
                     recognition.setImageAndMakeGrayScale(image_data);
                     recognition.recognise(i);

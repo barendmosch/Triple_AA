@@ -85,8 +85,8 @@ public class RecogniseController {
 
                 names_recognised.add(lbph.startLBPProcess());
 
-                // saveLBPImage(lbph.getLBPMat(), "joppe", i);
-                // saveGrayScaleImage(lbph.getGrayScaleMat(), "joppe", i);
+                saveLBPImage(lbph.getLBPMat(), "barend", i);
+                saveGrayScaleImage(lbph.getGrayScaleMat(), "barend", i);
                 
                 String final_name = null;
                 Set<String> distinct = new HashSet<>(names_recognised);
