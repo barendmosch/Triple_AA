@@ -18,8 +18,8 @@ Writen and researched at: 26-10-2020 */
 
 public class FaceFinder {
 
-        private static String HAAR_CASCADE = "/Users/barendmosch/source/repos/ZeroMQ_ws/jeromq/resources/cascades/haarcascade_frontalface_alt.xml";
-        private static String IMAGE_PATH = "/Users/barendmosch/source/repos/ZeroMQ_ws/jeromq/resources/images/";
+        private static String HAAR_CASCADE = "/Users/barendmosch/source/repos/ZeroMQ_ws/detectorWithJFrames/resources/cascades/haarcascade_frontalface_alt.xml";
+        private static String IMAGE_PATH = "/Users/barendmosch/source/repos/ZeroMQ_ws/detectorWithJFrames/resources/images/";
 
         private int absoluteFaceSize = 0;
         private CascadeClassifier faceDetector;

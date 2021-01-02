@@ -5,7 +5,10 @@ import org.opencv.videoio.VideoCapture;
 import converters.Mat2Image;
 
 import java.awt.image.BufferedImage;
+
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.videoio.Videoio;
 
 public class Camera {
 
@@ -16,7 +19,11 @@ public class Camera {
 
         Camera(){
                 video = new VideoCapture();
-                video.open(0);
+                /* PTZ Camera via the rtsp stream */
+                // video.open(VIDEO_STREAM);
+                /* PTZ Camera via USB not via the vid stream */
+                // video.open(1);
+                video.open("rtsp://192.168.1.188:554/stream/main");
         }
 
         public BufferedImage getOneFrame() {

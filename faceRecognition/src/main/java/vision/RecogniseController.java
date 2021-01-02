@@ -4,13 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +22,7 @@ import sql.DatabaseAction;
 
 public class RecogniseController {
         private static final float PERCENTAGE_THRESHOLD = 80;
-        private static final int AMOUNT_OF_SAMPLES = 30;
+        private static final int AMOUNT_OF_SAMPLES = 20;
 
         private List<Person> training_set;
         private Mat grayscale_image;
@@ -85,8 +82,8 @@ public class RecogniseController {
 
                 names_recognised.add(lbph.startLBPProcess());
 
-                // saveLBPImage(lbph.getLBPMat(), "barend", i);
-                // saveGrayScaleImage(lbph.getGrayScaleMat(), "barend", i);
+                // saveLBPImage(lbph.getLBPMat(), "roderick", i);
+                // saveGrayScaleImage(lbph.getGrayScaleMat(), "roderick", i);
                 
                 String final_name = null;
                 Set<String> distinct = new HashSet<>(names_recognised);
@@ -148,7 +145,7 @@ public class RecogniseController {
                 String path = "resources/trainingSet/"+name+"/grayScaleImages/gray_image"+i+".jpg";
                 try {
                         BufferedImage img = Converter.Mat2BufferedImage(mat);
-                        File f = new File("resources/trainingSet/"+name+"/grayScaleImages/gray_image"+i+".jpg");
+                        File f = new File(path);
                         ImageIO.write(img, "JPG", f);
                 } catch (IOException e) {
                         e.printStackTrace();

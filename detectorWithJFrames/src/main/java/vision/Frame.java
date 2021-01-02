@@ -31,7 +31,7 @@ public class Frame extends JFrame {
     
             faceFinder = new FaceFinder();
             camera = new Camera();
-            new MyThread().start();
+            // new MyThread().start();
         }
 
         public void paint(Graphics g){
@@ -41,7 +41,7 @@ public class Frame extends JFrame {
 
             Mat noFaceFrame = faceFinder.returnGrayFrame(currentFrame);
             Mat frame = faceFinder.detect(currentFrame);
-            
+
             if (frame.empty()){
                 g.drawImage(camera.returnImageFromMat(noFaceFrame), 0, 0, this);
             } else{
@@ -53,7 +53,7 @@ public class Frame extends JFrame {
             @Override
             public void run() {
                 for (;;){
-                    repaint();
+                    // paint();
                     try { 
                         Thread.sleep(30);
                     } catch (InterruptedException e) {

@@ -19,13 +19,13 @@ public class Main {
             int i = 0;
             Socket socket = context.createSocket(SocketType.PULL);
             socket.connect("tcp://*:5555");
-
+            // make this a localhost
             System.out.println("Connected to the server: ");
 
             RecogniseController recognition = new RecogniseController();
 
             /* MAKE NEW PERSON */
-            // String new_person_name = "styn";
+            // String new_person_name = "roderick";
             // DatabaseAction.addNewPerson(new_person_name);
             
             /* GOTTA ADD SOME FAILSAFE 
@@ -35,8 +35,8 @@ public class Main {
 
                 /* Start the recognition process after a certain amount of time one time only
                     In reality this will go on forever and I will not save outgoing pictures */
-                // if (i < 2){
-                    System.out.println(i);
+                // if (i < 50){
+                    // System.out.println(i);
                     recognition.setImageAndMakeGrayScale(image_data);
                     recognition.recognise(i);
 

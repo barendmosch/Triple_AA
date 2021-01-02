@@ -43,6 +43,26 @@ public class FrameController {
         }
     }
 
+    public int getFaceWidth(){
+        Rect face = faceFinder.getRectsOfFaces().toArray()[0];
+        return face.width;
+    }
+
+    public int getFaceHeight(){
+        Rect face = faceFinder.getRectsOfFaces().toArray()[0];
+        return face.height;
+    }
+
+    public int getFaceX(){
+        Rect face = faceFinder.getRectsOfFaces().toArray()[0];
+        return face.x;
+    }
+
+    public int getFaceY(){
+        Rect face = faceFinder.getRectsOfFaces().toArray()[0];
+        return face.y;
+    }
+
     public BufferedImage cropImage(BufferedImage img){
         Rect face = faceFinder.getRectsOfFaces().toArray()[0];
         int x = face.x;
