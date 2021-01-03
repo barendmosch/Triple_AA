@@ -30,9 +30,7 @@ public class FaceFinder {
 
         /* Code partially yanked from: https://github.com/opencv-java/face-detection/blob/master/src/it/polito/teaching/cv/FaceDetectionController.java AND
                                         https://www.geeksforgeeks.org/image-processing-java-set-9-face-detection/ 
-                but made it a bit my own
-                
-                Needs to be nicer and more fleshed out*/
+                */
         public Mat detect(BufferedImage frame){
                 initClassifier();
 
