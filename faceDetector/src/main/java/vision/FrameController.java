@@ -12,7 +12,7 @@ import org.opencv.core.Rect;
 import algorithms.FaceFinder;
 import converters.DataTypeConverter;
 
-/* This object will:
+/* This class will:
     - control the camera (getting incoming frames in different formats)
     - call the detection algorithm on the incoming frames read from the camera
     - call data type converters when:

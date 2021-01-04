@@ -12,9 +12,7 @@ import java.awt.image.BufferedImage;
 
 /* Face detection working on only images using Haar Cascades from the Viola and Jones Face detection algorithm 
 
-XML Yanked from: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_alt.xml 
-
-Writen and researched at: 26-10-2020 */
+XML from: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_alt.xml */
 
 public class FaceFinder {
 
@@ -25,11 +23,8 @@ public class FaceFinder {
         private CascadeClassifier faceDetector;
         private Mat2Image convert = new Mat2Image();
 
-        /* Code partially yanked from: https://github.com/opencv-java/face-detection/blob/master/src/it/polito/teaching/cv/FaceDetectionController.java AND
-                                        https://www.geeksforgeeks.org/image-processing-java-set-9-face-detection/ 
-                but made it a bit my own
+        /* Code partially yanked from: https://github.com/opencv-java/face-detection/blob/master/src/it/polito/teaching/cv/FaceDetectionController.java */
                 
-                Needs to be nicer and more fleshed out*/
         public Mat detect(BufferedImage frame){
                 initClassifier();
 
@@ -102,7 +97,4 @@ public class FaceFinder {
 
                 Imgcodecs.imwrite(IMAGE_PATH + "output.jpg", image);
         }
-
-        /* img2mat method yanked from: https://techutils.in/blog/2016/08/02/converting-java-bufferedimage-to-opencv-mat-and-vice-versa/ 
-                Transform an image to a OpenCV Mat */
 }

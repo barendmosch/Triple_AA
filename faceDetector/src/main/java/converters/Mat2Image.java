@@ -14,7 +14,6 @@ public class Mat2Image {
 
         public Mat2Image() {}
     
-        /* Magic shit that initializes the image dimensions from the camera video input */
         public void getSpace(Mat mat) {
                 int type = 0;
                 if (mat.channels() == 1 || mat.channels() == 4) {

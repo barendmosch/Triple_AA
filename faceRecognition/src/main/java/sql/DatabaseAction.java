@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import entity.Histogram;
 import entity.Person;
 
+/* A local MySQL database is set up with a training set of 10 people with each 50 histograms */
 public class DatabaseAction {
         private static String url = "jdbc:mysql://localhost:3306/Trainingsetdb?useSSL=false";
         private static String user = "root";

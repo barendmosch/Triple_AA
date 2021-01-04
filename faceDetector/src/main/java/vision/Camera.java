@@ -23,7 +23,6 @@ public class Camera {
                 //video.open("rtsp://192.168.1.188:554/stream/main");
                 
                 video.open(CAMERA_INDEX);
-                // System.out.print(video.isOpened() + "\n\n");
         }
 
         public BufferedImage getOneFrame() {

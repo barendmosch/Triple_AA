@@ -30,8 +30,7 @@ public class RecogniseController {
 
         /*
          * Not used atm, but can be used to save the RGB bufferedImage for taking
-         * pictures and what not
-         */
+         * pictures and what not */
         private BufferedImage buf_image;
 
         public RecogniseController() {

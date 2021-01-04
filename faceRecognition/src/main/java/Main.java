@@ -19,7 +19,7 @@ public class Main {
             int i = 0;
             Socket socket = context.createSocket(SocketType.PULL);
             socket.connect("tcp://*:5555");
-            // make this a localhost
+
             System.out.println("Connected to the server: ");
 
             RecogniseController recognition = new RecogniseController();
@@ -28,13 +28,12 @@ public class Main {
             // String new_person_name = "roderick";
             // DatabaseAction.addNewPerson(new_person_name);
             
-            /* GOTTA ADD SOME FAILSAFE 
-                Also add something that triggers a new SET when the camera cant see a face after a couple of seconds during a set */
+            /* Also add something that triggers a new SET when the camera cant see a face after a couple of seconds during a set */
             while(!Thread.currentThread().isInterrupted()){
                 byte[] image_data = socket.recv(0);
 
                 /* Start the recognition process after a certain amount of time one time only
-                    In reality this will go on forever and I will not save outgoing pictures */
+                    In reality this will go on forever */
                 // if (i < 50){
                     // System.out.println(i);
                     recognition.setImageAndMakeGrayScale(image_data);

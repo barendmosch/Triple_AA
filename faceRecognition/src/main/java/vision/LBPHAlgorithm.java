@@ -45,10 +45,6 @@ public class LBPHAlgorithm {
                 lbp_values = getLBPValues(mat_data_with_borders);
                 h_recognise = createHistogram();
 
-                // for(int i=0; i<100; i++){
-                //         String[] test_names = DatabaseAction.getAllNames();
-                // }
-
                 String[] names = getTrainingSetNames();
                 setDistances(names);
                 String recognised_person = compareDistances(names);

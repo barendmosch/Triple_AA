@@ -22,8 +22,8 @@ public class Camera {
                 /* PTZ Camera via the rtsp stream */
                 // video.open(VIDEO_STREAM);
                 /* PTZ Camera via USB not via the vid stream */
-                // video.open(1);
-                video.open("rtsp://192.168.1.188:554/stream/main");
+                video.open(1);
+                // video.open("rtsp://192.168.1.188:554/stream/main");
         }
 
         public BufferedImage getOneFrame() {

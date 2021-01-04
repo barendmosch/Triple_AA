@@ -19,6 +19,8 @@ public class Main {
                 try (ZContext context = new ZContext()) {
                     /* Make a new controller. */
                     int i = 0;
+
+                    /* This data is for the python PTZ scripts, which is not implemented yet */
                     int face_rectangular_width = 255;
                     int face_rectangular_height = 255;
                     int resolution_x = 1920;
@@ -78,11 +80,9 @@ public class Main {
                             frameDataMsg.add(imageInBytes);
                             frameDataMsg.send(socket);
                             // i++;
-                        }else{
-                            // System.out.println("No Face detected");
                         }
 
-                        /* If you want load an image to the socket */
+                        /* If we want load an image to the socket */
                         // String path = "/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/resources/images/fileName.jpg";
                         // BufferedImage image = controller.getFakeImage(path);
                         // if(controller.findFaceFromJPG(image)){
