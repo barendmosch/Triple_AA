@@ -1,6 +1,6 @@
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/java/converters/DataTypeConverter.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/java/algorithms/FaceFinder.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/java/vision/FrameController.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/java/vision/Camera.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/java/converters/Mat2Image.java
-/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/src/main/java/Main.java
+/Users/barendmosch/source/repos/Triple_AA/faceDetector/src/main/java/converters/Mat2Image.java
+/Users/barendmosch/source/repos/Triple_AA/faceDetector/src/main/java/Main.java
+/Users/barendmosch/source/repos/Triple_AA/faceDetector/src/main/java/algorithms/FaceFinder.java
+/Users/barendmosch/source/repos/Triple_AA/faceDetector/src/main/java/converters/DataTypeConverter.java
+/Users/barendmosch/source/repos/Triple_AA/faceDetector/src/main/java/vision/FrameController.java
+/Users/barendmosch/source/repos/Triple_AA/faceDetector/src/main/java/vision/Camera.java

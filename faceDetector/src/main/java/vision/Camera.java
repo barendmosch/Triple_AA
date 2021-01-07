@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
         - returning the current frame as a BufferedImage without face rectangle */
 public class Camera {
 	
-	private static final int CAMERA_INDEX = 1;
+	private static final int CAMERA_INDEX = 2;
         private VideoCapture video;
         public Mat2Image mat2Img;
 

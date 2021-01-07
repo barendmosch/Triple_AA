@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 XML from: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_alt.xml  */
 public class FaceFinder {
 
-        private static String HAAR_CASCADE = "/Users/barendmosch/source/repos/ZeroMQ_ws/faceDetector/resources/cascades/haarcascade_frontalface_alt.xml";
+        private static String HAAR_CASCADE = "./resources/cascades/haarcascade_frontalface_alt.xml";
 
         private int absoluteFaceSize = 0;
         private CascadeClassifier faceDetector;
