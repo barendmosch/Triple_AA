@@ -1,7 +1,0 @@
-{
-        "java.configuration.updateBuildConfiguration": "disabled",
-        // "java.project.referencedLibraries": [
-        //         //     "lib/*.jar",
-        //             "/usr/local/Cellar/opencv/4.5.0_4/share/java/opencv4/opencv-450.jar"
-        //         ]
-}
