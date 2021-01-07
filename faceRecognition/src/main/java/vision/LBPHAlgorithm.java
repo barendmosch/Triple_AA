@@ -15,8 +15,7 @@ import org.opencv.core.Mat;
 import converters.Converter;
 import entity.Person;
 public class LBPHAlgorithm {
-        public static final int NUMBER_OF_REGIONS = 256;
-        private static final int HISTOGRAM_SIZE = 255;
+        private static final int HISTOGRAM_MAX_PIXEL = 255;
         private static final int AMOUNT_OF_HISTOGRAMS = 50;
         private static final int CORRECT_SAMPLES = AMOUNT_OF_HISTOGRAMS / 2;
 
@@ -62,7 +61,7 @@ public class LBPHAlgorithm {
                 int n = lbp_values.length;
 
                 /* Initialise the histograms keys so that the keys which arent present in the histogram get a value of 0 */
-                for(int i=0; i<HISTOGRAM_SIZE; i++){
+                for(int i=0; i<HISTOGRAM_MAX_PIXEL; i++){
                         histogram.put(i, 0);
                 }
 
@@ -141,6 +140,7 @@ public class LBPHAlgorithm {
         /* Calculate the euclidean distance between the histogram values from every person, every histogram 
                 and the histogram generated from the frame we want to recognise */
         public double euclideanDistance(int[] values_train){
+                /* h_t = histograms training set || h_r = histogram recognise (current frame) */
                 int[] h_t_arr = values_train;
                 int[] h_r_arr = Converter.HashMapToIntArray(h_recognise);
 

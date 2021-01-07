@@ -25,7 +25,7 @@ public class Main {
             RecogniseController recognition = new RecogniseController();
 
             /* MAKE NEW PERSON */
-            // String new_person_name = "roderick";
+            // String new_person_name = "theo";
             // DatabaseAction.addNewPerson(new_person_name);
             
             /* Also add something that triggers a new SET when the camera cant see a face after a couple of seconds during a set */

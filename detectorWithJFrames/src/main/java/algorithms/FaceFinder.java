@@ -17,7 +17,7 @@ XML from: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascad
 public class FaceFinder {
 
         private static String HAAR_CASCADE = "/Users/barendmosch/source/repos/ZeroMQ_ws/detectorWithJFrames/resources/cascades/haarcascade_frontalface_alt.xml";
-        private static String IMAGE_PATH = "/Users/barendmosch/source/repos/ZeroMQ_ws/detectorWithJFrames/resources/images/";
+        private static String IMAGE_PATH = "./resources/cascades/haarcascade_frontalface_alt.xml";
 
         private int absoluteFaceSize = 0;
         private CascadeClassifier faceDetector;

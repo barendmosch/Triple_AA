@@ -2,7 +2,11 @@ package vision;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -86,11 +90,10 @@ public class RecogniseController {
                 
                 String final_name = null;
                 Set<String> distinct = new HashSet<>(names_recognised);
-
                 if (names_recognised.size() == AMOUNT_OF_SAMPLES) {
                         final_name = getResult(distinct);
-                        System.out.println("HELLO: " + final_name);
-                        clearList();                        
+                        // System.out.println("HELLO: " + final_name);
+                        clearList();         
                 }
         }
 
@@ -110,9 +113,22 @@ public class RecogniseController {
                         }
                         old_percentage = percentage;
                         System.out.println(percentage + "% " + s);
+                        writeToFile(percentage + "% " + s + "\n");
                 }
 
+                writeToFile("\n----------NEW SET----------\n");
+
                 return result;
+        }
+
+        public void writeToFile(String text){
+                String path = "/Users/barendmosch/source/repos/Triple_AA/faceRecognition/resources/trainingSet/outputsText/output.txt";
+                try{
+                        // String text = s + "% " + name + "\n";
+                        Files.write(Paths.get(path), text.getBytes(), StandardOpenOption.APPEND);
+                }catch(IOException e){
+                        e.printStackTrace();
+                }
         }
 
         public void clearList(){
@@ -122,7 +138,7 @@ public class RecogniseController {
         }
 
         /* the initialisation fase will only happen when the histogram data needs to be saved for a new person
-                it does exactly the same as the recognition fase, but it does perform the data comparison. 
+                it does exactly the same as the recognition fase, but it does not perform the data comparison. 
                 it makes 50 histograms and saves the name and histogram as a JSON in the database */                
         public void initialisePerson(String name){
                 LBPHAlgorithm lbph = new LBPHAlgorithm(grayscale_image, training_set);
