@@ -1,0 +1,9 @@
+vision/maths/LBP.class
+vision/LBPHAlgorithm.class
+Main.class
+converters/Converter.class
+vision/maths/BasicMath.class
+entity/Histogram.class
+vision/RecogniseController.class
+entity/Person.class
+sql/DatabaseAction.class

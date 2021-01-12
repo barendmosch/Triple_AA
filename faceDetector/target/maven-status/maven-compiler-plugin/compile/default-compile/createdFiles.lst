@@ -1,0 +1,7 @@
+converters/Mat2Image.class
+Main.class
+algorithms/FaceFinder.class
+vision/Camera.class
+vision/FrameController.class
+converters/DataTypeConverter.class
+Main$1.class

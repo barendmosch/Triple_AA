@@ -113,36 +113,13 @@ public class RecogniseController {
                         }
                         old_percentage = percentage;
                         System.out.println(percentage + "% " + s);
-                        writeToFile(percentage + "% " + s + "\n");
                 }
-
-                writeToFile("\n----------NEW SET----------\n");
-
                 return result;
         }
 
-        public void writeToFile(String text){
-                String path = "/Users/barendmosch/source/repos/Triple_AA/faceRecognition/resources/trainingSet/outputsText/output.txt";
-                try{
-                        // String text = s + "% " + name + "\n";
-                        Files.write(Paths.get(path), text.getBytes(), StandardOpenOption.APPEND);
-                }catch(IOException e){
-                        e.printStackTrace();
-                }
-        }
-
         public void clearList(){
-                // sleep(3000);
                 System.out.println("\n----------NEW SET----------\n");
                 names_recognised.clear();
-        }
-
-        /* the initialisation fase will only happen when the histogram data needs to be saved for a new person
-                it does exactly the same as the recognition fase, but it does not perform the data comparison. 
-                it makes 50 histograms and saves the name and histogram as a JSON in the database */                
-        public void initialisePerson(String name){
-                LBPHAlgorithm lbph = new LBPHAlgorithm(grayscale_image, training_set);
-                lbph.initPersonsData(name);
         }
 
         public void saveLBPImage(Mat mat, String name, int i){

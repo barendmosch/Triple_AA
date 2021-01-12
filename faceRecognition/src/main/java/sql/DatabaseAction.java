@@ -18,9 +18,10 @@ import entity.Person;
 
 /* A local MySQL database is set up with a training set of 10 people with each 50 histograms */
 public class DatabaseAction {
-        private static String url = "jdbc:mysql://localhost:3306/Trainingsetdb?useSSL=false";
+        private static String url = "jdbc:mysql://localhost:3306/TrainingSet?useSSL=false";
         private static String user = "root";
-        private static String password = "Bel32mac";
+        private static String password = "&HFX6y#U.Sn-Ws%2";
+        private static String DATABASE_NAME = "TrainingSet";
 
         /* Load all data needed for the LBPH algorithm. returns a list of persons which contains the name and a list of histgram data in the form hashmaps */
         public static List<Person> loadTrainingSet(){
@@ -30,7 +31,7 @@ public class DatabaseAction {
                 try (Connection con = DriverManager.getConnection(url, user, password)){
                         for(int i=0; i<names.length; i++){
                                 List<Histogram> histograms = new ArrayList<>();
-                                String query = "SELECT h_json FROM Trainingsetdb."+names[i]+";";
+                                String query = "SELECT h_json FROM "+DATABASE_NAME+"."+names[i]+";";
                         
                                 Statement st = con.createStatement();
                                 ResultSet rs = st.executeQuery(query);
@@ -59,7 +60,7 @@ public class DatabaseAction {
                 int training_set = 0;
                 
                 try (Connection con = DriverManager.getConnection(url, user, password)){
-                        String query = "SELECT count(*) FROM Trainingsetdb.People;";
+                        String query = "SELECT count(*) FROM "+DATABASE_NAME+".People;";
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(query);
                         if (rs.next()) {
@@ -79,7 +80,7 @@ public class DatabaseAction {
                 String[] names = new String[size];
 
                 try (Connection con = DriverManager.getConnection(url, user, password)){
-                        String query = "SELECT name FROM Trainingsetdb.People;";
+                        String query = "SELECT name FROM "+DATABASE_NAME+".People;";
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(query);
                         int i = 0;
@@ -103,7 +104,7 @@ public class DatabaseAction {
                 int[] result = new int[size];
 
                 try (Connection con = DriverManager.getConnection(url, user, password)){
-                        String query = "SELECT h_json FROM Trainingsetdb."+name+" WHERE id = "+(index+1)+";";
+                        String query = "SELECT h_json FROM "+DATABASE_NAME+"."+name+" WHERE id = "+(index+1)+";";
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(query);
 
@@ -114,44 +115,6 @@ public class DatabaseAction {
                                 }
                         }
 
-                        con.close();
-                } catch (SQLException ex) {
-                        ex.printStackTrace();
-                } 
-
-                return result;
-        }
-
-        /* Create a new table for a new person 
-                This is for when creating a person */ 
-        public static Boolean addNewPerson(String name){
-                boolean result = true;
-                try (Connection con = DriverManager.getConnection(url, user, password)){
-                        String query = "INSERT INTO People(name) VALUES ('"+name+"');";
-                        Statement st = con.createStatement();
-                        result = st.execute(query);
-
-                        query = "CREATE TABLE IF NOT EXISTS `"+name+"` ( `id` int(50) NOT NULL AUTO_INCREMENT, `h_json` JSON NOT NULL, PRIMARY KEY (`id`));";
-                        st = con.createStatement();
-                        result = st.execute(query);
-
-                        con.close();
-                }catch (SQLException ex) {
-                        ex.printStackTrace();
-                } 
-
-                return result;
-        }
-
-        /* Save al histogram values for a specific person in his/her table.
-                This is for when creating a person */
-        public static boolean saveHistograms(String name, String data){
-                boolean result = false;
-
-                try (Connection con = DriverManager.getConnection(url, user, password)){
-                        String query = "INSERT INTO "+name+" (h_json) VALUES ('"+data+"');";
-                        Statement st = con.createStatement();
-                        result = st.execute(query);
                         con.close();
                 } catch (SQLException ex) {
                         ex.printStackTrace();

@@ -164,18 +164,6 @@ public class LBPHAlgorithm {
                 return lbp.makeLBPMatrix(lbp_values);
         }
 
-        public void initPersonsData(String name){
-                int[][] mat_data_with_borders = convertMat2DIntArrayWithBorders(mat);
-                lbp_values = getLBPValues(mat_data_with_borders);
-                h_recognise = createHistogram();
-
-                String json_string = Converter.buildJSONStringFromMap(h_recognise);
-
-                DatabaseAction.saveHistograms(name, json_string);
-
-                lbp_mat = makeLBPMatrix();
-        }
-
         public Mat getGrayScaleMat(){
                 return mat;
         }
@@ -183,7 +171,6 @@ public class LBPHAlgorithm {
         public Mat getLBPMat(){
                 return lbp_mat;
         }
-
 
         public void printHistogram(Map<Integer, Integer> map){
                 System.out.println(map);
