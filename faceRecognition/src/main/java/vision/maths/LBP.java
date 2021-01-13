@@ -3,8 +3,16 @@ package vision.maths;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
+/* this class contains the more mathematical operations of the LBP algorithm. It contains the following:
+        - the conversion of the input Matrix to a 2D array and adding the border values for easier making the 3x3 matrices
+        - calculating the LBP values by finding the neighbourhood of the central pixel and looping clockwise through the 
+        neighbourhood and creating a bitstring based on the difference between the cental pixel and neighbourhood
+        - making the lbp matrix containing the lbp operators, which atm is not needed for the recognition, 
+        but still can be used to create the image */
 public class LBP {
+        /* indicating the border of the matrix, makes it easier to create the neighbourhood of the central pixel */
         private static final int BORDER_VALUE = -1;
+        /* amount of neighbours of the central pixel */
         private static final int RADIUS = 8;
 
         private Mat mat;
@@ -13,9 +21,10 @@ public class LBP {
                 this.mat = mat;
         }
 
+        /* convert the input matrix to 2D int array with borders */
         public int[][] convertMat2DIntArrayWithBorders(Mat mat){
-                /* we add 2 to the rows and cols because we want to make a border around the values
-                        so that its easier to create arrays of the neighbours of every value */
+                /* adding 2 to the rows and cols for making the border around the values
+                        so that its easier to create arrays of the neighbours */
                 int borders = 2;
                 int[][] values = new int[mat.rows() + borders][mat.cols() + borders];
 
@@ -36,8 +45,12 @@ public class LBP {
                 return values;
         }
 
+        /* for every pixel in the 2D array save the central pixels and the neighbourhood of that central pixel
+                it builds a bit string based on the difference between the central pixel and the neighbourhood pixels
+                convert the 8 bit string to decimal that makes the LBP operator
+                add the LBP operator to an array
+                return the array */
         public int[] getLBPValues(int[][] values){
-                /* hold every neighbour array for every value */
                 int[][] all_the_neighbours = new int[(int)mat.total()][RADIUS];
                 int[] middle_values = new int[(int)mat.total()];
 
@@ -97,12 +110,13 @@ public class LBP {
                 return lbp_values;
         }
 
+        /* convert an array of LBP operators to a Matrix */
         public Mat makeLBPMatrix(int[] decimals){
                 /* Convert the 1D array to 2D so it is easier to fill the matrix */
                 int[][] lbp_values = new int[mat.rows()][mat.cols()];
                 lbp_values = BasicMath.arrayTo2DArray(decimals, lbp_values);
                 
-                /* Define the LBP_OUTPUT matrix with the same dimensions as the input grayscale image */
+                /* Define the LBP matrix with the same dimensions as the input grayscale image */
                 Mat lbp_mat = new Mat(mat.rows(), mat.cols(), CvType.CV_32F);
 
                 /* Loop through the dimensions and fill the matrix row by row */

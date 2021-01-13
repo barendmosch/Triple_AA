@@ -2,6 +2,7 @@ package entity;
 
 import java.util.List;
 
+/* Person entity class containing the name and the histograms of that person */
 public class Person {
         private String name;
         private List<Histogram> hist_list;

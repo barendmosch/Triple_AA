@@ -6,13 +6,16 @@ import nu.pattern.OpenCV;
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 
+/* the face recogniser will do the following:
+    - get the image byte data from the ZMQ pipeline
+    - convert the byte data to a BufferedImage, grayScale image and matrix
+    - start the recognition process on that frame */
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        OpenCV.loadLocally(); // initialize the library locally
+        OpenCV.loadLocally();
         
         try (ZContext context = new ZContext()) {
-            int i = 0;
             Socket socket = context.createSocket(SocketType.PULL);
             socket.connect("tcp://*:5555");
 
@@ -26,7 +29,7 @@ public class Main {
 
                 /* Start the recognition process */
                 recognition.setImageAndMakeGrayScale(image_data);
-                recognition.recognise(i);
+                recognition.recognise();
             }
         }
     }

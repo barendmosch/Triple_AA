@@ -1,7 +1,8 @@
 package vision.maths;
 
-/* This class will contain all the basic mathematical function that every object can call. 
-        These function are different than the matrix specific funtions */
+/* This class will contain all the basic mathematical function that any object has access to. It contains:
+        - conversion of an arrat to a 2D array
+        - rearranging the 8 size neighbourhood array so we can traverse it clockwise (as a 3x3 matrix, ignoring the central value) */
 public class BasicMath {
 
         public BasicMath(){}
@@ -20,8 +21,7 @@ public class BasicMath {
                 return output_decimal_region;
         }
 
-        /* rearrange the array to make it available to bit conversion in a clockwise way.
-                It is extremely ugly, but it works, look here https://iq.opengenus.org/lbph-algorithm-for-face-recognition/ */
+        /* rearrange the array to make it available to bit conversion in a clockwise way */
         public static int[] reArrangeArray(int[] a){
                 int[] r = new int[a.length];
                 for(int i=0; i<a.length; i++){

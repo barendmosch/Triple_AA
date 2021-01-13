@@ -7,12 +7,15 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 
+/* This class includes methods to convert a Matrix to a BufferedImage and back */
 public class Mat2Image {
 
-        public Mat mat = new Mat();
+        public Mat mat;
         public BufferedImage img;
 
-        public Mat2Image() {}
+        public Mat2Image() {
+                mat = new Mat();
+        }
     
         public void getSpace(Mat mat) {
                 int type = 0;
@@ -31,13 +34,13 @@ public class Mat2Image {
                 }
         }
     
-        /* Read the camera input (matrix) and return the current frame as a BufferedImage */
+        /* the camera frames are Matrices, which we need to convert to a BufferedImage */
         public BufferedImage getImageFromMat(Mat mat){
                 getSpace(mat);
                 /* Raster is a rectangular array of pixels */
                 WritableRaster raster = img.getRaster();
-                DataBufferByte dataBuffer = (DataBufferByte) raster.getDataBuffer();
-                byte[] data = dataBuffer.getData();
+                DataBufferByte data_buffer = (DataBufferByte) raster.getDataBuffer();
+                byte[] data = data_buffer.getData();
                 mat.get(0, 0, data);
                 return img;
         }
@@ -46,12 +49,12 @@ public class Mat2Image {
         public Mat getMatFromImage(BufferedImage in) {
                 Mat out = new Mat(in.getHeight(), in.getWidth(), CvType.CV_8UC3);
                 byte[] data = new byte[in.getWidth() * in.getHeight() * (int) out.elemSize()];
-                int[] dataBuff = in.getRGB(0, 0, in.getWidth(), in.getHeight(), null, 0, in.getWidth());
+                int[] data_buff = in.getRGB(0, 0, in.getWidth(), in.getHeight(), null, 0, in.getWidth());
     
-                for (int i = 0; i < dataBuff.length; i++) {
-                    data[i * 3] = (byte) ((dataBuff[i]));
-                    data[i * 3 + 1] = (byte) ((dataBuff[i]));
-                    data[i * 3 + 2] = (byte) ((dataBuff[i]));
+                for (int i = 0; i < data_buff.length; i++) {
+                    data[i * 3] = (byte) ((data_buff[i]));
+                    data[i * 3 + 1] = (byte) ((data_buff[i]));
+                    data[i * 3 + 2] = (byte) ((data_buff[i]));
                 }
     
                 out.put(0, 0, data);
